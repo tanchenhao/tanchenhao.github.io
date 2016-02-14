@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yuto的成长之路</title>
+  <title>实践慕课网canvas绘制倒计时效果 | yuto的成长之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yuto的成长之路">
-<meta property="og:url" content="http://tanchenhao.me/index.html">
+  <meta name="description" content="难点重点
+以小圆球的形式表示数字
+彩色小圆球掉落的动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实践慕课网canvas绘制倒计时效果">
+<meta property="og:url" content="http://tanchenhao.me/2016/02/15/countdown/index.html">
 <meta property="og:site_name" content="yuto的成长之路">
-<meta property="og:description">
+<meta property="og:description" content="难点重点
+以小圆球的形式表示数字
+彩色小圆球掉落的动画">
+<meta property="og:updated_time" content="2016-02-14T19:56:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yuto的成长之路">
-<meta name="twitter:description">
+<meta name="twitter:title" content="实践慕课网canvas绘制倒计时效果">
+<meta name="twitter:description" content="难点重点
+以小圆球的形式表示数字
+彩色小圆球掉落的动画">
   
     <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
   
@@ -65,9 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-countdown" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-countdown" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/15/countdown/" class="article-date">
   <time datetime="2016-02-14T16:00:00.000Z" itemprop="datePublished">2016-02-15</time>
@@ -84,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/15/countdown/">实践慕课网canvas绘制倒计时效果</a>
+    <h1 class="article-title" itemprop="name">
+      实践慕课网canvas绘制倒计时效果
     </h1>
   
 
@@ -95,12 +100,30 @@
       
         <h2 id="u96BE_u70B9_u91CD_u70B9"><a href="#u96BE_u70B9_u91CD_u70B9" class="headerlink" title="难点重点"></a>难点重点</h2><ul>
 <li>以小圆球的形式表示数字</li>
-<li>彩色小圆球掉落的动画
-        
-          <p class="article-more-link">
-            <a href="/2016/02/15/countdown/#more">Read More</a>
-          </p>
-        
+<li>彩色小圆球掉落的动画<a id="more"></a>
+<h2 id="u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9"><a href="#u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9" class="headerlink" title="学习到的知识点"></a>学习到的知识点</h2></li>
+<li>canvas绘图</li>
+<li>set setInterval方法制作动画</li>
+<li>点阵方式定位</li>
+<li>js时间方法</li>
+<li>随机量的取得</li>
+</ul>
+<h3 id="canvas_u7ED8_u56FE"><a href="#canvas_u7ED8_u56FE" class="headerlink" title="canvas绘图"></a>canvas绘图</h3><p>canvas是一种基于状态的绘图，先确定状态，再进行绘制。</p>
+<p>需要先获得context进行绘制<br>    var canvas = document.getElementById(‘canvans’);<br>    var context=canvans.getContext(‘2d’);</p>
+<p>画直线stroke笔画<br>    context.moveTo(100,100)//起点左上角为原点<br>    context.lineTo(700,700)//终点<br>    context.lineWidth = 5 //线宽<br>    context.strokeStyle = ‘#005588’//线的样式<br>    context.stroke()//画线</p>
+<p>填充<br>    context.fillStyle = (‘’)<br>    context.fill()</p>
+<p>定义图形分割，使几个图形状态互相不干扰<br>    context.beginPath() //重新规划路径<br>    context.closePath() //结束路径，会将不封闭路径连接起来</p>
+<h3 id="canvas_u5236_u4F5C_u52A8_u753B"><a href="#canvas_u5236_u4F5C_u52A8_u753B" class="headerlink" title="canvas制作动画"></a>canvas制作动画</h3><p>setInterval方法<br>    setInterval(<br>        function(){<br>            render();<br>            update();<br>        }<br>        ,<br>        50<br>    );<br>第一个参数为匿名函数，表示每一帧要做什么事情</p>
+<ol>
+<li>绘制当前画面</li>
+<li>根据当前画面，调整数据结构<br>第二个参数为毫秒，每隔多少时间运行一次匿名函数</li>
+</ol>
+<h3 id="u70B9_u9635_u65B9_u5F0F_u5B9A_u4F4D"><a href="#u70B9_u9635_u65B9_u5F0F_u5B9A_u4F4D" class="headerlink" title="点阵方式定位"></a>点阵方式定位</h3><p>3维数组，里面为0，1组成的二维数组表示数字。<br>    digit =<br>    [<br>        [<br>            [0,0,1,1,1,0,0],<br>            [0,1,1,0,1,1,0],<br>            [1,1,0,0,0,1,1],<br>            [1,1,0,0,0,1,1],<br>            [1,1,0,0,0,1,1],<br>            [1,1,0,0,0,1,1],<br>            [1,1,0,0,0,1,1],<br>            [1,1,0,0,0,1,1],<br>            [0,1,1,0,1,1,0],<br>            [0,0,1,1,1,0,0]<br>        ],//0<br>        [<br>            [0,0,0,1,1,0,0],<br>            [0,1,1,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [0,0,0,1,1,0,0],<br>            [1,1,1,1,1,1,1]<br>        ],//1<br>            [0,0,0,0],<br>            [0,0,0,0],<br>            [0,1,1,0],<br>            [0,1,1,0],<br>            [0,0,0,0],<br>            [0,0,0,0],<br>            [0,1,1,0],<br>            [0,1,1,0],<br>            [0,0,0,0],<br>            [0,0,0,0]<br>        ]//:<br>    ];</p>
+<h3 id="js_u65F6_u95F4_u65B9_u6CD5"><a href="#js_u65F6_u95F4_u65B9_u6CD5" class="headerlink" title="js时间方法"></a>js时间方法</h3><pre><code>new Date(2016, 1, 15, 18, 47, 52)//定义一个时间量，其中月份从0开始计。
+new Date()//获得当前时间。
+getTime()//方法获得距离1970年1月1日之间的毫秒数。
+</code></pre><h3 id="u968F_u673A_u91CF_u7684_u53D6_u5F97"><a href="#u968F_u673A_u91CF_u7684_u53D6_u5F97" class="headerlink" title="随机量的取得"></a>随机量的取得</h3><p>Math.random()随机取0到1之间的数值。<br>Math.pow(-1, Math.ceil(Math.random()*1000)) 随机取-1或者1。<br>ceil()向上取最接近的整数<br>floor()向下取最接近的整数<br>pow（-1，9）表示-1的9次幂。</p>
+
       
     </div>
     <footer class="article-footer">
@@ -112,110 +135,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-html学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/14/html学习笔记/" class="article-date">
-  <time datetime="2016-02-13T16:00:00.000Z" itemprop="datePublished">2016-02-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/14/html学习笔记/">html学习笔记</a>
-    </h1>
+    <a href="/2016/02/14/html学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">html学习笔记</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>Html把网页上的内容分成大大小小的盒子。</p>
-<ul>
-<li>html标记</li>
-<li>块级元素和行内元素</li>
-<li>文档对象模型
-        
-          <p class="article-more-link">
-            <a href="/2016/02/14/html学习笔记/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/14/html学习笔记/" data-id="cikmyv2z200008ezc0tp17122" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/13/hello-world/" class="article-date">
-  <time datetime="2016-02-12T16:00:00.000Z" itemprop="datePublished">2016-02-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/13/hello-world/">mac下hexo建立github博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="u5B89_u88C5git"><a href="#u5B89_u88C5git" class="headerlink" title="安装git"></a>安装git</h3><h3 id="u5B89_u88C5node-js"><a href="#u5B89_u88C5node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/13/hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/13/hello-world/" data-id="cikmyv2zk00058ezcfj387371" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
 </section>
         
           <aside id="sidebar">
