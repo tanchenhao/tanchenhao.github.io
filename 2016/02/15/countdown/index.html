@@ -5,22 +5,17 @@
   
   <title>实践慕课网canvas绘制倒计时效果 | yuto的成长之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="难点重点
-以小圆球的形式表示数字
-彩色小圆球掉落的动画">
+  <meta name="description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实践慕课网canvas绘制倒计时效果">
 <meta property="og:url" content="http://tanchenhao.me/2016/02/15/countdown/index.html">
 <meta property="og:site_name" content="yuto的成长之路">
-<meta property="og:description" content="难点重点
-以小圆球的形式表示数字
-彩色小圆球掉落的动画">
-<meta property="og:updated_time" content="2016-02-14T19:56:43.000Z">
+<meta property="og:description">
+<meta property="og:image" content="http://i11.tietuku.com/e480c6a548bc9354.png">
+<meta property="og:updated_time" content="2016-02-15T02:22:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实践慕课网canvas绘制倒计时效果">
-<meta name="twitter:description" content="难点重点
-以小圆球的形式表示数字
-彩色小圆球掉落的动画">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
   
@@ -98,10 +93,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u96BE_u70B9_u91CD_u70B9"><a href="#u96BE_u70B9_u91CD_u70B9" class="headerlink" title="难点重点"></a>难点重点</h2><ul>
+        <p><img src="http://i11.tietuku.com/e480c6a548bc9354.png"><br><a id="more"></a></p>
+<hr>
+<h2 id="u96BE_u70B9_u91CD_u70B9"><a href="#u96BE_u70B9_u91CD_u70B9" class="headerlink" title="难点重点"></a>难点重点</h2><ul>
 <li>以小圆球的形式表示数字</li>
-<li>彩色小圆球掉落的动画<a id="more"></a>
-<h2 id="u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9"><a href="#u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9" class="headerlink" title="学习到的知识点"></a>学习到的知识点</h2></li>
+<li>彩色小圆球掉落的动画</li>
+</ul>
+<h2 id="u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9"><a href="#u5B66_u4E60_u5230_u7684_u77E5_u8BC6_u70B9" class="headerlink" title="学习到的知识点"></a>学习到的知识点</h2><ul>
 <li>canvas绘图</li>
 <li>set setInterval方法制作动画</li>
 <li>点阵方式定位</li>
@@ -123,11 +121,175 @@
 new Date()//获得当前时间。
 getTime()//方法获得距离1970年1月1日之间的毫秒数。
 </code></pre><h3 id="u968F_u673A_u91CF_u7684_u53D6_u5F97"><a href="#u968F_u673A_u91CF_u7684_u53D6_u5F97" class="headerlink" title="随机量的取得"></a>随机量的取得</h3><p>Math.random()随机取0到1之间的数值。<br>Math.pow(-1, Math.ceil(Math.random()*1000)) 随机取-1或者1。<br>ceil()向上取最接近的整数<br>floor()向下取最接近的整数<br>pow（-1，9）表示-1的9次幂。</p>
+<h2 id="u6E90_u7801_u5206_u6790_uFF1A"><a href="#u6E90_u7801_u5206_u6790_uFF1A" class="headerlink" title="源码分析："></a>源码分析：</h2><pre><code>var WINDOW_WIDTH = 1024;
+var WINDOW_HEIGHT = 768;
+var RADIUS = 8;  //定义小圆球半径
+var MARGIN_TOP = 60; 
+var MARGIN_LEFT = 30;
 
+const endTime = new Date(2016, 1, 15, 18, 47, 52);//设定倒计时的目标时间
+var curShowTimeSeconds = 0; //定义需要倒计时总秒数curShowTimeSeconds 
+var balls = [];//定义数字改变时掉落球的数组
+const colors = [&quot;#33B5E5&quot;, &quot;#0099CC&quot;, &quot;#AA66CC&quot;, &quot;#9933CC&quot;, &quot;#99CC00&quot;, &quot;#669900&quot;, &quot;#FFBB33&quot;, &quot;#FF8800&quot;, &quot;#FF4444&quot;, &quot;#CC0000&quot;];
+//定义存放掉落小球颜色的数组
+
+window.onload = function(){
+    var canvas = document.getElementById(&apos;canvas&apos;);
+    var context = canvas.getContext(&quot;2d&quot;); 
+    //设定画布长和高
+    canvas.width = WINDOW_WIDTH;    
+    canvas.height = WINDOW_HEIGHT;
+
+    curShowTimeSeconds = getCurrentShowSeconds();//调用函数
+
+    //动画绘制方法
+    setInterval(
+        function(){
+        //每一帧要做的事情
+            render(context); //绘制当前画面
+            update(); //根据当前画面，调整数据结构
+        }
+        ,
+        50//时间，单位毫秒
+        );
+
+}
+
+function getCurrentShowSeconds () {
+    //获取倒计时显示的秒数
+    var curTime = new Date();//定义当前时间
+    var ret = endTime.getTime() - curTime.getTime();//getTime()方法获得距离1970年的毫秒数
+    ret = Math.round(ret/1000);//将毫秒转换为秒
+    return ret &gt;= 0 ? ret : 0;//如果ret 大于0则返回ret，否则返回0.
+}
+
+function update(){
+    //动画的具体行为
+    var nextShowTimeSeconds = getCurrentShowSeconds();//获得倒计时此时的秒数
+
+    //将现在倒计时上，小时，分钟，秒显示的具体数字
+    var nextHours = parseInt(nextShowTimeSeconds/3600);
+    var nextMinutes = parseInt((nextShowTimeSeconds-3600*nextHours)/60);
+    var nextSeconds = nextShowTimeSeconds%60;
+
+    var curHours = parseInt(curShowTimeSeconds/3600);
+    var curMinutes = parseInt((curShowTimeSeconds-3600*curHours)/60);
+    var curSeconds = curShowTimeSeconds%60;
+
+    if(nextSeconds != curSeconds){
+        //判断时间是否更改，若改变为新的秒数
+        curShowTimeSeconds = nextShowTimeSeconds;
+
+        //获得掉落小球的形成位置
+        if(parseInt(curHours/10) != parseInt(nextHours/10)){
+            addBalls(MARGIN_LEFT, MARGIN_TOP, parseInt(curHours/10));
+        }
+        if(parseInt(curHours%10) != parseInt(nextHours%10)){
+            addBalls(MARGIN_LEFT+15*(RADIUS+1), MARGIN_TOP, parseInt(curHours%10));
+        }
+        if(parseInt(curMinutes/10) != parseInt(nextMinutes/10)){
+            addBalls(MARGIN_LEFT+39*(RADIUS+1), MARGIN_TOP, parseInt(curMinutes/10));
+        }
+        if(parseInt(curMinutes%10) != parseInt(nextMinutes%10)){
+            addBalls(MARGIN_LEFT+54*(RADIUS+1), MARGIN_TOP, parseInt(curMinutes%10));
+        }
+        if(parseInt(curSeconds/10) != parseInt(nextSeconds/10)){
+            addBalls(MARGIN_LEFT+78*(RADIUS+1), MARGIN_TOP, parseInt(curSeconds/10));
+        }
+        if(parseInt(curSeconds%10) != parseInt(nextSeconds%10)){
+            addBalls(MARGIN_LEFT+93*(RADIUS+1), MARGIN_TOP, parseInt(curSeconds%10));
+        }
+
+    }
+    updateBalls();//启动小球的掉落
+}
+
+function updateBalls(){
+    //小球掉落的动画
+    for(var i=0; i&lt;balls.length; i++){
+
+        balls[i].x += balls[i].vx; //小球的x轴位置=小球沿x轴速度的累加
+        balls[i].y += balls[i].vy; //小球的y轴位置=小球沿x轴速度的累加
+        balls[i].vy += balls[i].g; //小球的y轴的速度=小球加速度的累加
+
+        if(balls[i].y &gt;= WINDOW_HEIGHT-RADIUS){
+            //碰撞检测
+            balls[i].y = WINDOW_HEIGHT-RADIUS;//小球落地后不足下降
+            balls[i].vy = -balls[i].vy*0.75;//小球弹球的速度=小球原来的速度反向*空气摩擦系数
+        }
+    }
+}
+
+function addBalls (x, y, num) {
+    //在balls数组中生成掉落的小球
+    for( var i = 0; i&lt;digit[num].length; i++){ //遍历阵列的行
+        for(var j = 0; j&lt;digit[num][i].length; j++){//遍历阵列的行中的每一个数
+            if( digit[num][i][j] == 1){ //判断值是否为1
+                var aBall = {
+                    //定义对象掉落的小球
+                        x:x+j*2*(RADIUS+1)+(RADIUS+1), 
+                        y:y+i*2*(RADIUS+1)+(RADIUS+1), 
+                        g:1.5+Math.random(),//在1.5到2.5之间随机取g得值
+                        vx:Math.pow(-1, Math.ceil(Math.random()*1000))*4,//随机取x轴速度的方向
+                        vy:-5,
+                        color:colors[Math.floor(Math.random()*colors.length)]//随机定义小球的颜色
+                        }
+                balls.push( aBall )//往balls数组中，放入小球
+            }
+
+        }
+    }
+}
+
+function render(cxt){
+
+    cxt.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);//清空屏幕
+
+    //定义倒计时各个位置上的数值
+    var hours = parseInt(curShowTimeSeconds/3600);
+    var minutes = parseInt((curShowTimeSeconds-3600*hours)/60);
+    var seconds = parseInt(curShowTimeSeconds%60);
+    //以小球的形式绘制数字
+    renderDight(MARGIN_LEFT, MARGIN_TOP, parseInt(hours/10), cxt);
+    renderDight(MARGIN_LEFT+15*(RADIUS+1), MARGIN_TOP, parseInt(hours%10), cxt);
+    renderDight(MARGIN_LEFT+30*(RADIUS+1), MARGIN_TOP, 10, cxt);
+    renderDight(MARGIN_LEFT+39*(RADIUS+1), MARGIN_TOP, parseInt(minutes/10), cxt);
+    renderDight(MARGIN_LEFT+54*(RADIUS+1), MARGIN_TOP, parseInt(minutes%10), cxt);
+    renderDight(MARGIN_LEFT+69*(RADIUS+1), MARGIN_TOP, 10, cxt);
+    renderDight(MARGIN_LEFT+78*(RADIUS+1), MARGIN_TOP, parseInt(seconds/10), cxt);
+    renderDight(MARGIN_LEFT+93*(RADIUS+1), MARGIN_TOP, parseInt(seconds%10), cxt);
+
+    for(var i=0; i&lt;balls.length; i++){
+        //绘制掉落的小球
+        cxt.fillStyle=balls[i].color;//随机定义掉落小球的颜色
+
+        cxt.beginPath();
+        cxt.arc( balls[i].x, balls[i].y, RADIUS, 0, 2*Math.PI);
+        cxt.closePath();
+        cxt.fill();
+    }
+}
+function renderDight(x, y, num, cxt){
+    //绘制显示倒计时的小球
+    cxt.fillStyle = &quot;rgb(0, 102, 155)&quot;;
+
+    for( var i = 0; i&lt;digit[num].length; i++){
+        for(var j = 0; j&lt;digit[num][i].length; j++){
+            if( digit[num][i][j] == 1){
+                cxt.beginPath();
+                cxt.arc( x+j*2*(RADIUS+1)+(RADIUS+1), y+i*2*(RADIUS+1)+(RADIUS+1), RADIUS, 0, 2*Math.PI);
+                cxt.closePath();
+
+                cxt.fill();
+            }
+        }
+    }
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/15/countdown/" data-id="cikmz5vtm0000dpzc5wgy3mmf" class="article-share-link">Share</a>
+      <a data-url="http://tanchenhao.me/2016/02/15/countdown/" data-id="cikncqc2o0000ttzc3gellbu4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js实践/">JS实践</a></li></ul>
