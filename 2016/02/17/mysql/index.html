@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yuto的成长之路</title>
+  <title>MySQL数据库的简单操作1 | yuto的成长之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yuto的成长之路">
-<meta property="og:url" content="http://tanchenhao.me/index.html">
+  <meta name="description" content="mysql数据库操作
+
+连接数据库 mysql_connect(‘url’, ‘username’, ‘password’) 返回true表示连接成功；返回false连接失败。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库的简单操作1">
+<meta property="og:url" content="http://tanchenhao.me/2016/02/17/mysql/index.html">
 <meta property="og:site_name" content="yuto的成长之路">
-<meta property="og:description">
+<meta property="og:description" content="mysql数据库操作
+
+连接数据库 mysql_connect(‘url’, ‘username’, ‘password’) 返回true表示连接成功；返回false连接失败。">
+<meta property="og:updated_time" content="2016-02-17T04:56:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yuto的成长之路">
-<meta name="twitter:description">
+<meta name="twitter:title" content="MySQL数据库的简单操作1">
+<meta name="twitter:description" content="mysql数据库操作
+
+连接数据库 mysql_connect(‘url’, ‘username’, ‘password’) 返回true表示连接成功；返回false连接失败。">
   
     <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
   
@@ -65,9 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/17/mysql/" class="article-date">
   <time datetime="2016-02-16T16:00:00.000Z" itemprop="datePublished">2016-02-17</time>
@@ -84,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/17/mysql/">MySQL数据库的简单操作1</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL数据库的简单操作1
     </h1>
   
 
@@ -97,11 +102,59 @@
 <p>mysql数据库操作</p>
 <ol>
 <li><p>连接数据库<br> mysql_connect(‘url’, ‘username’, ‘password’)<br> 返回true表示连接成功；返回false连接失败。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/17/mysql/#more">Read More</a>
-          </p>
-        
+<a id="more"></a>
+<pre><code>if($con = mysql_connect(&apos;localhost&apos;,&apos;root&apos;,&apos;11301102&apos;)){
+    echo &quot;连接成功&quot;;
+}else{
+    echo&apos;连接失败&apos;;
+}
+</code></pre></li>
+<li><p>选择数据库<br> mysql_select_db(‘数据库名字’)<br> 返回true表示连接成功；返回false连接失败。</p>
+</li>
+<li><p>设置编码方式<br> mysql_query(‘set names utf8’);</p>
+</li>
+<li><p>执行sql语句<br> mysql_query(‘sql语句’)</p>
+</li>
+<li><p>输出错误位置<br> mysql_error()</p>
+<pre><code>if(mysql_query(&apos;insert into test(num) values(&quot;3,4,5&quot;)&apos;)){
+    echo&quot;插入成功&quot;;
+}else{
+    echo mysql_error();        //输出错误位置
+    echo&quot;插入失败&quot;;
+};
+</code></pre></li>
+<li><p>查询数据库<br> $query = mysql_query(‘select * from 数据表名’);<br> 当mysql_query执行sql是select语句的时候，如果执行成功返回的是资源标识符。<br>  mysql_fetch_row($query)每执行一次，都从资源也就是结果集里依次取一条数据，以数组的形式返回出来，当前一次已经取到最后一条数据的时候，返回空结果。返回的数组是一个一维索引数组，每一个下标与数据库里的字段的排序相对应。</p>
+<pre><code> $query = mysql_query(&apos;select * from test&apos;); 
+while($row = mysql_fetch_row($query)){
+    print_r($row);
+}
+</code></pre><p>  mysql_fetch_array() 第一个参数:资源标识符； 第二个参数 1、MYSQL_ASSOC 只输出关联数组；2、MYSQL_NUM 输出索引数组；3、MYSQL_BOTH 默认状态都输出.<br>  mysql_fetch_assoc()获取和显示数据 与 mysql_fetch_array(资源标识符，MYSQL_ASSOC) 相同.</p>
+<p>  mysql_fetch_object 输出的结构是对象.</p>
+<pre><code> $query=mysql_query(&apos;select * from fruitshop&apos;);
+$arr= mysql_fetch_object($query);
+print_r($arr);
+echo $arr-&gt;name;//对象中name属性调取
+</code></pre><p> mysql_num_rows()参数为资源标识符，输出结果集中行的数目，输出结果为数字。</p>
+<pre><code>$query = mysql_query(&apos;select * from fruitshop&apos;);
+if($query &amp;&amp; mysql_num_rows($query)){//进行数据输出
+    echo &apos;可以输出&apos;；
+}else{
+    echo &apos;没有数据&apos;；
+}
+</code></pre><p> mysql_result(结果集地址,行号,字段的名称或偏移量) 返回结果集中一个字段的值</p>
+<pre><code>$query = mysql_query(&apos;select count(*) from fruitshop&apos;);//count(*)计算数据数量
+$arr=mysql_fetch_row($query);
+echo $arr[0];
+echo mysql_result($query, 0);
+
+$query = mysql_query(&apos;select * from fruitshop&apos;);
+echo mysql_result($query,2,&apos;name&apos;);//相当于mysql_result($query,2,1)
+</code></pre><p> mysql_affected_rows(连接标识符)返回受影响的记录行数，返回前一次insert,update,delete影响的记录的行数。</p>
+</li>
+<li><p>关闭数据库<br> mysql_close(连接标识符);</p>
+</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
@@ -113,157 +166,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-countdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/15/countdown/" class="article-date">
-  <time datetime="2016-02-14T16:00:00.000Z" itemprop="datePublished">2016-02-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/15/countdown/">实践慕课网canvas绘制倒计时效果</a>
-    </h1>
+    <a href="/2016/02/15/countdown/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">实践慕课网canvas绘制倒计时效果</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://i11.tietuku.com/e480c6a548bc9354.png"><br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/15/countdown/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/15/countdown/" data-id="cikqd5t6y000dydzcz31tmszj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js实践/">JS实践</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-html学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/14/html学习笔记/" class="article-date">
-  <time datetime="2016-02-13T16:00:00.000Z" itemprop="datePublished">2016-02-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/14/html学习笔记/">html学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>Html把网页上的内容分成大大小小的盒子。</p>
-<ul>
-<li>html标记</li>
-<li>块级元素和行内元素</li>
-<li>文档对象模型
-        
-          <p class="article-more-link">
-            <a href="/2016/02/14/html学习笔记/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/14/html学习笔记/" data-id="cikqd5t6s0005ydzcqimmpkrc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/13/hello-world/" class="article-date">
-  <time datetime="2016-02-12T16:00:00.000Z" itemprop="datePublished">2016-02-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/13/hello-world/">mac下hexo建立github博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="u5B89_u88C5git"><a href="#u5B89_u88C5git" class="headerlink" title="安装git"></a>安装git</h3><h3 id="u5B89_u88C5node-js"><a href="#u5B89_u88C5node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/13/hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/13/hello-world/" data-id="cikqd5t6w0009ydzcs8jv7mmw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
 </section>
         
           <aside id="sidebar">
