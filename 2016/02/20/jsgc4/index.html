@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>JavaScript 简介 | yuto的成长之路</title>
+  <title>JavaScript基本概念2 | yuto的成长之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="“要想全面理解JavaScript,关键在于弄清楚它的本质、历史和局限性。”">
+  <meta name="description">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 简介">
-<meta property="og:url" content="http://tanchenhao.me/2016/02/16/jsgc1/index.html">
+<meta property="og:title" content="JavaScript基本概念2">
+<meta property="og:url" content="http://tanchenhao.me/2016/02/20/jsgc4/index.html">
 <meta property="og:site_name" content="yuto的成长之路">
-<meta property="og:description" content="“要想全面理解JavaScript,关键在于弄清楚它的本质、历史和局限性。”">
-<meta property="og:image" content="http://i12.tietuku.com/c7ea2778020e8df7.jpg">
-<meta property="og:image" content="http://i12.tietuku.com/7e451b343812d17c.jpg">
-<meta property="og:updated_time" content="2016-02-17T07:33:47.000Z">
+<meta property="og:description">
+<meta property="og:updated_time" content="2016-02-20T08:01:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 简介">
-<meta name="twitter:description" content="“要想全面理解JavaScript,关键在于弄清楚它的本质、历史和局限性。”">
+<meta name="twitter:title" content="JavaScript基本概念2">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
   
@@ -68,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-jsgc1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-jsgc4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/02/16/jsgc1/" class="article-date">
-  <time datetime="2016-02-15T16:00:00.000Z" itemprop="datePublished">2016-02-16</time>
+    <a href="/2016/02/20/jsgc4/" class="article-date">
+  <time datetime="2016-02-19T16:00:00.000Z" itemprop="datePublished">2016-02-20</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript 简介
+      JavaScript基本概念2
     </h1>
   
 
@@ -95,35 +93,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>“要想全面理解JavaScript,关键在于弄清楚它的本质、历史和局限性。”<br><a id="more"></a><br><img src="http://i12.tietuku.com/c7ea2778020e8df7.jpg"><br><img src="http://i12.tietuku.com/7e451b343812d17c.jpg"></p>
-<h2 id="JavaScript_u7684_u6807_u51C6_u5316"><a href="#JavaScript_u7684_u6807_u51C6_u5316" class="headerlink" title="JavaScript的标准化"></a>JavaScript的标准化</h2><p>1997年，以JavaScript为蓝本的建议被提交给了欧洲计算机制造商协会（ECMA，European Computer Manufactures Association）。经过数月的努力完成ECMA-262定义一种名为ECMAScript（发音为“ek-ma-script)的新脚本语言标准。<br>自此以后，浏览器开发商就致力于将ECMAScript作为各自JavaScript实现的基础。</p>
-<h2 id="JavaScript_u5B9E_u73B0"><a href="#JavaScript_u5B9E_u73B0" class="headerlink" title="JavaScript实现"></a>JavaScript实现</h2><p>一个完整的JavaScript实现应该由下列不同的部分组成</p>
-<ul>
-<li>核心（ECMAScript）</li>
-<li>文档对象模型（DOM）</li>
-<li>浏览器对象模型（BOM）<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3>ECMA-262标准没有参照Web浏览器，它规定了这门语言的下列组成部分</li>
-<li>语法</li>
-<li>类型</li>
-<li>语句</li>
-<li>关键字</li>
-<li>保留字</li>
-<li>操作符</li>
-<li>对象<br>ECMAScript就是对实现该标准规定的各个方面内容的语言的描述。JavaScript实现了ECMAScript，Node.js同样也实现了ECMAScript。我们常见的Web浏览器只是ECMAScript实现的宿主环境之一，宿主环境不仅提供基本的ECMAScript实现，同时也会提供该语言的扩展，以便语言和环境之间对接交互。如DOM，利用ECMAScript的核心类型和语法提供更多更具体的功能，以便实现对web环境的操作。<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3>文档对象模型（Document Object Model）是针对XML但经过扩展用于HTML的应用编程接口API（Application Programming Interface）。<br>DOM把整个页面映射为一个多层的节点结构。</li>
-<li>HTML或XML页面中的每个组成部分都是某种类型的节点。</li>
-<li>这些节点又包含着不同的数据类型。<br>通过DOM创建的树形图，可以控制页面内容和结构。借助DOM提供的API，可以删除、替换、修改任何节点。<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3>浏览器对象模型（Browser Object Model）使用BOM可以控制浏览器显示的页面以外的部分。习惯上把所有针对浏览器的JavaScript扩展算作BOM的一部分。下面是一些这样的扩展：</li>
-<li>弹出新浏览器窗口的功能</li>
-<li>移动、缩放和关闭浏览器窗口的功能</li>
-<li>提供浏览器详细信息的navigator对象</li>
-<li>提供浏览器所加载页面的详细信息的location对象</li>
-<li>提供用户显示器分辨率详细信息的screen对象</li>
-<li>对cookies的支持</li>
-<li>像XMLHttpRequest和IE的ActiveXObject这样的自定义对象</li>
-</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://tanchenhao.me/2016/02/16/jsgc1/" data-id="cikuu71o6000fyhzcpchjn41m" class="article-share-link">Share</a>
+      <a data-url="http://tanchenhao.me/2016/02/20/jsgc4/" data-id="cikuu71nq0005yhzc1l37zz41" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js高程/">JS高程</a></li></ul>
@@ -134,19 +108,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/02/17/mysql/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MySQL数据库的简单操作1
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/15/countdown/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/02/19/jsgc3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">实践慕课网canvas绘制倒计时效果</div>
+      <div class="article-nav-title">JavaScript基本概念1</div>
     </a>
   
 </nav>
