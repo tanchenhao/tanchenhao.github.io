@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript基本概念3 | yuto的成长之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="语句也称流程控制语句函数封装任意多条语句，可以在任何地方任何时候调用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基本概念3">
+<meta property="og:url" content="http://tanchenhao.me/2016/02/23/jsgc5/index.html">
+<meta property="og:site_name" content="yuto的成长之路">
+<meta property="og:description" content="语句也称流程控制语句函数封装任意多条语句，可以在任何地方任何时候调用。">
+<meta property="og:updated_time" content="2016-02-24T07:29:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript基本概念3">
+<meta name="twitter:description" content="语句也称流程控制语句函数封装任意多条语句，可以在任何地方任何时候调用。">
+  
+    <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yuto的成长之路</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">找一份实习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">存档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://tanchenhao.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jsgc5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/23/jsgc5/" class="article-date">
+  <time datetime="2016-02-22T16:00:00.000Z" itemprop="datePublished">2016-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript基本概念3
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>语句也称流程控制语句<br>函数封装任意多条语句，可以在任何地方任何时候调用。<br><a id="more"></a></p>
+<h2 id="u8BED_u53E5"><a href="#u8BED_u53E5" class="headerlink" title="语句"></a>语句</h2><h4 id="if_u8BED_u53E5"><a href="#if_u8BED_u53E5" class="headerlink" title="if语句"></a>if语句</h4><pre><code>if(condition){
+    statement1
+}else{
+    statement2
+}
+</code></pre><p>其中的condition可以是任意表达式，ECMAScript会自动调用Boolean()转换函数将表达式的结果转换为一个布尔值。如果对condition求值的结果是true，则执行statement1，如果是false，则执行statement2。<br>最佳实践两个语句始终使用代码块，即使要执行的代码只有一行。</p>
+<h4 id="do-while_u8BED_u53E5"><a href="#do-while_u8BED_u53E5" class="headerlink" title="do-while语句"></a>do-while语句</h4><p>do-while语句是一种后测试循环语句，循环体内的代码至少会被执行一次。</p>
+<h4 id="while_u8BED_u53E5"><a href="#while_u8BED_u53E5" class="headerlink" title="while语句"></a>while语句</h4><p>while语句属于前测试语句，循环体内的代码可能永远不会被执行。</p>
+<h4 id="for_u8BED_u53E5"><a href="#for_u8BED_u53E5" class="headerlink" title="for语句"></a>for语句</h4><p>for语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力。<br>使用while循环做不到的，for循环同样做不到。for循环只是把循环有关的代码集中在一个位置。<br>for循环变量初始化得表达式中，可以不使用var关键字。该变量的初始化可以在外部执行。<br>由于ECMAScript中不存在块级作用域，因此在循环内部定义的变量也可以在外部访问到。<br>for语句中的初始化表达式、控制表达式和循环后表达式都是可选的。将三个表达式全部省略就会创建一个无限循环，而只给出控制表达式就是把for循环转换为while循环。</p>
+<h4 id="for-in_u8BED_u53E5"><a href="#for-in_u8BED_u53E5" class="headerlink" title="for-in语句"></a>for-in语句</h4><p>for-in语句是一种精准的迭代语句，可以用来枚举对象的属性。</p>
+<pre><code>for(property in ecpression){
+    statement
+}
+</code></pre><p>ECMAScript对象的属性没有顺序。因此，通过for-in循环输出的属性名的顺序是不可预测的。<br>如果要迭代的对象的变量值是null或undefined，for-in语句会抛出错误。ECMAScript5更正了这一行为；对这种情况不再抛出错误，而只是不执行循环体。建议在使用for-in循环之前，先检测确认该对象的值不是null或undefined。</p>
+<h4 id="label_u8BED_u53E5"><a href="#label_u8BED_u53E5" class="headerlink" title="label语句"></a>label语句</h4><p>使用label语句可以在代码中添加标签，以便将来由break或continue使用，这种联合使用的情况对发生在循环嵌套的情况下。</p>
+<h4 id="break_u548Ccontinue_u8BED_u53E5"><a href="#break_u548Ccontinue_u8BED_u53E5" class="headerlink" title="break和continue语句"></a>break和continue语句</h4><p>break语句会立即退出循环，强制继续执行循环后面的语句；而continue虽然也是立即退出循环，但退出循环会从循环的顶部继续执行。</p>
+<h4 id="with_u8BED_u53E5"><a href="#with_u8BED_u53E5" class="headerlink" title="with语句"></a>with语句</h4><p>with语句的作用是将代码的作用域设置到一个特定的对象中。定义with语句的目的主要是为了简化多次编写同一个对象的工作。</p>
+<pre><code>with(location){
+    var qs = search.substring(1);
+    var hostName = hostname;
+    var url = href;
+}
+</code></pre><p>在这个例子中使用with语句关联了location对象。这意味着在with语句的代码块内部，每个变量首先被认为是一个局部变量，而如果在局部环境中找不到该变量的定义，就会查询location对象中是否有同名的属性，如果发现了同名属性，则以location对象属性的值作为变量的值。<br>严格模式下不允许使用with语句，否则会被视为语法错误。<br>由于大量使用with语句会导致性能下降，同时给调试代码造成困难，因此在开发大型应用程勋时，不建议使用with语句。</p>
+<h4 id="switch_u8BED_u53E5"><a href="#switch_u8BED_u53E5" class="headerlink" title="switch语句"></a>switch语句</h4><p>switch语句中的每一种case表示：如果表达式等于这个值，则执行后面的语句。而break会导致代码执行流跳出switch语句。如果省略break关键字，就会导致执行完当前case后，继续执行下一个case。最后的default关键字则用于在表达式不匹配前面任何一种情况的时候，执行default里的代码。<br>switch语句在比较值时使用的是全等操作符，因此不会发生类型转换。<br>在switch语句中可以使用任何数据类型；每一个case的值不一定是常量，可以是变量，甚至是表达式。</p>
+<h2 id="u51FD_u6570"><a href="#u51FD_u6570" class="headerlink" title="函数"></a>函数</h2><p>ECMAScript使用function关键字来声明函数，后跟一组参数以及函数体。语法如下：</p>
+<pre><code>function functionName(arg0, arg1, arg2, ..., argN){
+    statements
+}
+</code></pre><p>函数可以通过函数名来调用，后面还要加上一对圆括号和参数。<br>ECMAScript中的函数在定义时不必指定是否有返回值。任何函数在任何时候都可以通过return语句后跟要返回的值来实现返回值。return语句也可以不带任何返回值，函数将返回undefined.这种用法一般用在需要提前停止函数执行又不需要返回值的情况下。函数会在执行完return语句后停止并立即退出。因此，位于return语句之后的任何代码都永远不会执行。</p>
+<h4 id="u51FD_u6570_u7684_u53C2_u6570"><a href="#u51FD_u6570_u7684_u53C2_u6570" class="headerlink" title="函数的参数"></a>函数的参数</h4><p>ECMAScript函数不介意传递进来多少个参数，也不在乎传递进来的参数的数据类型。<br>ECMAScript中的参数在内部是用一个数组来表示的，函数接收的始终都是这个数组，而不关心数组中包含哪些参数。<br>命名参数只提供便利，但不是必须的，解析器不会验证命名参数。没有传递值得命名参数将自动赋予undefined值。<br>在函数体内可以通过arguments对象来访问这个参数数组，从而获取传递给函数的每一个参数。用length属性来确定传递进来的参数的数量。arguments对象可以和命名参数一起使用，并且它的值永远和对应命名参数的值保持同步。如果只传入了一个参数，那么arguments[1]设置的值不会反应到命名参数中，因为arguments对象的长度由传入的参数个数决定，不是由定义函数时的命名参数的个数决定的。<br>严格模式下，对argument赋值将会变得无效。重写arguments的值会导致语法错误。</p>
+<h4 id="u51FD_u6570_u6CA1_u6709_u91CD_u8F7D"><a href="#u51FD_u6570_u6CA1_u6709_u91CD_u8F7D" class="headerlink" title="函数没有重载"></a>函数没有重载</h4><p>ECMAScript函数没有签名，因为其参数是由包含零或多个值的数组来表示的。而没有函数签名，真正的重载是不可能做到的。<br>如果在ECMAScript中定义了两个名字相同的函数，后定义的函数覆盖了先定义的函数。<br>通过检查传入函数中参数的类型和数量并作出不同反应，可以模拟方法的重载。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tanchenhao.me/2016/02/23/jsgc5/" data-id="cil0iteep0005unzcegq3ax0f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js高程/">JS高程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/23/jsgc4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript基本概念2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js实践/">JS实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js高程/">JS高程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/js实践/" style="font-size: 10px;">JS实践</a> <a href="/tags/js高程/" style="font-size: 20px;">JS高程</a> <a href="/tags/mysql/" style="font-size: 10px;">MySQL</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/02/23/jsgc5/">JavaScript基本概念3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/23/jsgc4/">JavaScript基本概念2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/19/jsgc3/">JavaScript基本概念1</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/18/jsgc2/">在HTML下使用JavaScript</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/17/mysql/">MySQL数据库的简单操作1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 tanchenhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">存档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
