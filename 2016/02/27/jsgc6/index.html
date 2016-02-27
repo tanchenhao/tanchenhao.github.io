@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript变量 | yuto的成长之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript变量松散的类型的本质，决定了它只是在特定时间用于保存特定值的一个名字而已。由于不存在定义某个变量必须要保存何种数据类型值的规则，变量的值及其数据类型可以在脚本的生命周期内改变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript变量">
+<meta property="og:url" content="http://tanchenhao.me/2016/02/27/jsgc6/index.html">
+<meta property="og:site_name" content="yuto的成长之路">
+<meta property="og:description" content="JavaScript变量松散的类型的本质，决定了它只是在特定时间用于保存特定值的一个名字而已。由于不存在定义某个变量必须要保存何种数据类型值的规则，变量的值及其数据类型可以在脚本的生命周期内改变。">
+<meta property="og:updated_time" content="2016-02-27T04:29:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript变量">
+<meta name="twitter:description" content="JavaScript变量松散的类型的本质，决定了它只是在特定时间用于保存特定值的一个名字而已。由于不存在定义某个变量必须要保存何种数据类型值的规则，变量的值及其数据类型可以在脚本的生命周期内改变。">
+  
+    <link rel="alternative" href="/atom.xml" title="yuto的成长之路" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yuto的成长之路</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">找一份实习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">存档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://tanchenhao.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jsgc6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/27/jsgc6/" class="article-date">
+  <time datetime="2016-02-26T16:00:00.000Z" itemprop="datePublished">2016-02-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript变量
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>JavaScript变量松散的类型的本质，决定了它只是在特定时间用于保存特定值的一个名字而已。由于不存在定义某个变量必须要保存何种数据类型值的规则，变量的值及其数据类型可以在脚本的生命周期内改变。<br><a id="more"></a></p>
+<h2 id="u57FA_u672C_u7C7B_u578B_u548C_u5F15_u7528_u7C7B_u578B_u7684_u503C"><a href="#u57FA_u672C_u7C7B_u578B_u548C_u5F15_u7528_u7C7B_u578B_u7684_u503C" class="headerlink" title="基本类型和引用类型的值"></a>基本类型和引用类型的值</h2><p>ECMAScript变量包含两种不同数据类型的值：基本类型值和引用类型值。基本类型值是简单的数据段，而引用类型值是那些可能由对个值构成的对象。<br>5种基本数据类型的是按值访问的，因为可以操作保存在变量中的实际的值。<br>引用类型的值是保存在内存中的对象。JavaScript不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。当复制保存对象的某个变量时，操作的是对象的引用。但在为对象添加属性时，操作的是实际的对象。</p>
+<h4 id="u52A8_u6001_u7684_u5C5E_u6027"><a href="#u52A8_u6001_u7684_u5C5E_u6027" class="headerlink" title="动态的属性"></a>动态的属性</h4><p>定义基本类型之和引用类型值的方式是类似的：创建一个变量并为该变量赋值。对于引用类型的值，我们可以为其添加属性和方法，也可以改变和删除其属性和方法。我们不能给基本类型的值添加属性。</p>
+<h4 id="u590D_u5236_u53D8_u91CF_u503C"><a href="#u590D_u5236_u53D8_u91CF_u503C" class="headerlink" title="复制变量值"></a>复制变量值</h4><p>如果从一个变量向另一个变量复制基本类型的值，会在变量对象上创建一个新值，然后把该值复制到为新变量分配的位置上。这两个变量可以参与任何操作而不会相互影响。<br>当从一个变量向另一个变量复制引用类型的值时，同样也会将存储在变量对象中的值复制一份为新变量分配的空间中。不同的是，这个值的副本实际是一个指针，而这个指针指向存储在堆中的一个对象。复制操作结束后，两个变量实际将引用同一个对象。因此，改变其中一个变量，就会影响另一个变量。</p>
+<h4 id="u4F20_u9012_u53C2_u6570"><a href="#u4F20_u9012_u53C2_u6570" class="headerlink" title="传递参数"></a>传递参数</h4><p>ECMAScript中所有函数的参数都是按值传递的。<br>在向参数传递基本类型的值时，被传递的值会被复制给一个局部变量（即命名参数，或者说是arguments对象中的一个元素）。<br>在向参数传递引用类型的值时，会把这个值在内存中的地址复制给局部变量，因此这个局部变量的变化会反映在函数外部。即使在函数内部修改了参数的值，但原始的引用仍然保持未变。</p>
+<h4 id="u68C0_u6D4B_u7C7B_u578B"><a href="#u68C0_u6D4B_u7C7B_u578B" class="headerlink" title="检测类型"></a>检测类型</h4><p>ECMAScript给检测对象的类型提供了instanceof操作符，语法如下：</p>
+<pre><code>result = variable instanceof constructor//如果变量是给定的引用类型返回true
+</code></pre><h2 id="u6267_u884C_u73AF_u5883_u548C_u4F5C_u7528_u57DF"><a href="#u6267_u884C_u73AF_u5883_u548C_u4F5C_u7528_u57DF" class="headerlink" title="执行环境和作用域"></a>执行环境和作用域</h2><p>执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。<br>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途，是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行代码所在环境的变量对象。如果这个环境是函数，则其活动对象作为变量对象。活动对象最开始只包含一个变量，即arguments对象（这个对象在全局环境中是不存在的）。作用域链中的下一个变量对象来自包含（外部）环境，而再下一个变量对象则来自下一个包含环境。全局执行环境的变量对象始终都是作用域链中的最后一个对象。<br>全局执行环境是最外围的一个执行环境。根据ECMAScript实现所在的宿主环境不同，表示执行环境的对象也不一样。某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁（全局环境直到应用程序退出————如关闭网页时才被销毁）。<br>标识符解析是沿着作用域链一级一级地搜索标识符的过程。搜索过程始终从作用域链的前端开始，然后逐级地向后回溯，直到找到标识符。如果存在一个局部的变量的定义，则搜素会停止，不再进入另一个变量的对象。在局部作用域中定义的变量可以在局部和全局变量互换使用。内部环境可以通过作用域链访问所有的外部环境，但外部环境不能访问内部环境的任何变量和函数。</p>
+<h4 id="u5EF6_u957F_u4F5C_u7528_u57DF_u94FE"><a href="#u5EF6_u957F_u4F5C_u7528_u57DF_u94FE" class="headerlink" title="延长作用域链"></a>延长作用域链</h4><ul>
+<li>try-catch语句的catch块；</li>
+<li>with语句。<br>这两个语句都会在作用域链的前端添加一个变量对象，会将指定的对象添加到作用域链中。对catch语句来说，会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明。<h4 id="u6CA1_u6709_u5757_u7EA7_u4F5C_u7528_u57DF"><a href="#u6CA1_u6709_u5757_u7EA7_u4F5C_u7528_u57DF" class="headerlink" title="没有块级作用域"></a>没有块级作用域</h4>在JavaScript中，if语句中的变量声明会将变量添加到当前的执行环境。由for语句创建的变量i即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中。<br>使用var声明的变量会自动添加到最接近的环境中。在函数内部，最接近的环境就是函数的局部环境；在with语句中，最接近的环境是函数环境。如果初始化变量时没有使用var声明，该变量会自动添加到全局环境。<h2 id="u5783_u573E_u6536_u96C6"><a href="#u5783_u573E_u6536_u96C6" class="headerlink" title="垃圾收集"></a>垃圾收集</h2>待补充</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tanchenhao.me/2016/02/27/jsgc6/" data-id="cil4mowxd0005qjzchcc1qztv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js高程/">JS高程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/24/jsgc5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript基本概念3</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js实践/">JS实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js高程/">JS高程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/js实践/" style="font-size: 10px;">JS实践</a> <a href="/tags/js高程/" style="font-size: 20px;">JS高程</a> <a href="/tags/mysql/" style="font-size: 10px;">MySQL</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/02/27/jsgc6/">JavaScript变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/24/jsgc5/">JavaScript基本概念3</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/23/jsgc4/">JavaScript基本概念2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/19/jsgc3/">JavaScript基本概念1</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/18/jsgc2/">在HTML下使用JavaScript</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 tanchenhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">存档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
